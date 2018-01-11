@@ -4,7 +4,7 @@ module Zipcoder
     ZIPCODE_DOWNLOAD_URI = 'http://download.geonames.org/export/zip/US.zip'
 
     def self.download
-      zipfile = Zipcoder::ZipfileHandler.get_zip_from_uri(ZIPCODE_DOWNLOAD_URI)
+      zipfile = Zipcoder::ZipfileHandler.get_zip_from_path(ZIPCODE_DOWNLOAD_URI)
       csv_path = Pathname.new( __dir__ + "/data/us_zipcodes.csv")
       new(zipfile).write_to_csv(csv_path)
     end
@@ -34,7 +34,6 @@ module Zipcoder
           csv << headers_mapping.map { |_, index| tsv_arr[index] }
         end
       end
-
     end
   end
 end

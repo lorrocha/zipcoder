@@ -5,6 +5,8 @@ require "zipcoder/railtie" if defined?(Rails)
 require 'pry'
 require 'open-uri'
 require 'csv'
+require 'zip'
+
 
 module Zipcoder
   class << self

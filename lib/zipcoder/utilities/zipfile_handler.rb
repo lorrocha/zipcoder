@@ -1,9 +1,6 @@
-require 'zip'
-require 'open-uri'
-
 module Zipcoder
   class ZipfileHandler
-    def self.get_zip_from_uri(path)
+    def self.get_zip_from_path(path)
       zipped_directory = open(path)
       new(zipped_directory)
     end
