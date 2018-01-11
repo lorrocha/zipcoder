@@ -1,9 +1,9 @@
 require "zipcoder/version"
 require "zipcoder/zipcode_downloader"
+require "zipcoder/utilities/zipfile_handler"
 require "zipcoder/railtie" if defined?(Rails)
 require 'pry'
 require 'open-uri'
-require 'zip'
 require 'csv'
 
 module Zipcoder
