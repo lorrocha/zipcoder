@@ -13,14 +13,14 @@ RSpec.describe Zipcoder::ZipcodeDownloader do
     before :each do
       allow(zipfile).to receive(:read_content_from_zipfile).and_return(zipfile_content)
       allow(Zipcoder::ZipfileHandler).to receive(:get_zip_from_path).and_return(zipfile)
-      allow(Pathname).to receive(:new).and_return(csv_path)
+      stub_const("Zipcoder::CSV_PATH", csv_path)
     end
 
     it 'writes a to the specified path with headers' do
       Zipcoder::ZipcodeDownloader.download
 
       expect(File.read(csv_path)).to eq \
-        "Country Code,Postal Code,City,State,State Abbreviation,Latitude,Longitude\na,two,dimensional,array,of,the,method\n"
+        "a,two,dimensional,array,of,the,method\n"
     end
 
   end
@@ -33,7 +33,7 @@ RSpec.describe Zipcoder::ZipcodeDownloader do
     context "headers: true" do
       it 'will write the csv to the csv path correctly with the headers from the headers_mapping' do
         downloader = Zipcoder::ZipcodeDownloader.new(zipfile)
-        downloader.write_to_csv(csv_path)
+        downloader.write_to_csv(csv_path, true)
 
         expect(File.read(csv_path)).to eq \
           "Country Code,Postal Code,City,State,State Abbreviation,Latitude,Longitude\na,two,dimensional,array,of,the,method\n"
@@ -43,7 +43,7 @@ RSpec.describe Zipcoder::ZipcodeDownloader do
     context "headers: false" do
       it 'will write the csv to the csv path correctly without headers' do
         downloader = Zipcoder::ZipcodeDownloader.new(zipfile)
-        downloader.write_to_csv(csv_path, false)
+        downloader.write_to_csv(csv_path)
 
         expect(File.read(csv_path)).to eq "a,two,dimensional,array,of,the,method\n"
       end
