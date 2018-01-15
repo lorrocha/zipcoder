@@ -36,7 +36,7 @@ RSpec.describe Zipcoder::ZipcodeDownloader do
         downloader.write_to_csv(csv_path, true)
 
         expect(File.read(csv_path)).to eq \
-          "Country Code,Postal Code,City,State,State Abbreviation,Latitude,Longitude\na,two,dimensional,array,of,the,method\n"
+          "country_code,zipcode,city,state,state_abbreviation,latitide,longitude\na,two,dimensional,array,of,the,method\n"
       end
     end
 
